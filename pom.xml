@@ -4,7 +4,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	http://maven.apache.org/xsd/maven-4.0.0.xsd">  
 
 <modelVersion>4.0.0</modelVersion>  
-  <groupId>com.github.A-Garg123</groupId>  
+  <groupId>com.github.aditi1128</groupId>  
   <artifactId>DevOps-project</artifactId>  
   <version>1.0</version>  
   <packaging>jar</packaging>  
