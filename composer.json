@@ -1,0 +1,29 @@
+{
+    "name": "aditi1128/cloud-application-development-project",
+    "description": "Search engine project for Cloud-application-development-project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aditi Sood",
+            "email": "aditi11sood@gmail.com",
+            "homepage": "https://github.com/aditi1128"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "symfony/http-foundation": "^5.3",
+        "symfony/http-kernel": "^5.3",
+        "symfony/yaml": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "SearchEngine\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
+    }
+}
