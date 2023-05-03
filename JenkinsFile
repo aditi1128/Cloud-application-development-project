@@ -6,32 +6,6 @@ pipeline {
    }
    
    stages {
-      stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Install Dependencies') {
-            environment {
-                PATH = "/usr/local/bin:${PATH}"
-            }
-            steps {
-                sh 'php -v'
-                sh 'php -r "copy(\'https://getcomposer.org/installer\', \'composer-setup.php\');"'
-                sh 'php composer-setup.php --install-dir=/usr/local/bin --filename=composer'
-                sh 'composer install'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'php artisan build'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'php artisan test'
-            }
-        }
       stage( 'Build Artifact') {
          steps {
           sh "mvn clean package -DskipTests=true" 
@@ -51,6 +25,16 @@ pipeline {
             }
          }
       }
+      stage('Composer') {
+            environment {
+                PHP_VERSION = '8.1.2'
+            }
+            steps {
+                sh "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer"
+                sh "php${PHP_VERSION} /usr/local/bin/composer install"
+            }
+        }
+    }
      stage('Sonarqube Analysis - SAST') {
          steps {
                withSonarQubeEnv('SonarQube') {
@@ -61,11 +45,7 @@ pipeline {
                }
            }
         }
-       stage('Deploy') {
-            steps {
-                sh 'php artisan deploy'
-            }
-        }
+       
        
 
     
