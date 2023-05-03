@@ -5,7 +5,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 <modelVersion>4.0.0</modelVersion>  
   <groupId>com.github.aditi1128</groupId>  
-  <artifactId>DevOps-project</artifactId>  
+  <artifactId>search-engine-project</artifactId>  
   <version>1.0</version>  
   <packaging>jar</packaging>  
   
