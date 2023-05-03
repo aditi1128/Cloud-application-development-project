@@ -25,19 +25,6 @@ pipeline {
             }
          }
       }
-      stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/aditi1128/Cloud-application-development-project'
-            }
-        }
-        stage('Composer') {
-            environment {
-                PHP_VERSION = '8.1.2'
-            }
-            steps {
-                sh "php${PHP_VERSION} /usr/local/bin/composer install"
-            }
-        }
      stage('Sonarqube Analysis - SAST') {
          steps {
                withSonarQubeEnv('SonarQube') {
