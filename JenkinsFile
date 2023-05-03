@@ -6,6 +6,32 @@ pipeline {
    }
    
    stages {
+      stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') {
+            environment {
+                PATH = "/usr/local/bin:${PATH}"
+            }
+            steps {
+                sh 'php -v'
+                sh 'php -r "copy(\'https://getcomposer.org/installer\', \'composer-setup.php\');"'
+                sh 'php composer-setup.php --install-dir=/usr/local/bin --filename=composer'
+                sh 'composer install'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'php artisan build'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'php artisan test'
+            }
+        }
       stage( 'Build Artifact') {
          steps {
           sh "mvn clean package -DskipTests=true" 
@@ -35,7 +61,11 @@ pipeline {
                }
            }
         }
-       
+       stage('Deploy') {
+            steps {
+                sh 'php artisan deploy'
+            }
+        }
        
 
     
