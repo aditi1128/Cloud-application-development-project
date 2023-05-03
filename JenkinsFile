@@ -25,16 +25,19 @@ pipeline {
             }
          }
       }
-      stage('Composer') {
+      stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your/repo.git'
+            }
+        }
+        stage('Composer') {
             environment {
                 PHP_VERSION = '8.1.2'
             }
             steps {
-                sh "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer"
                 sh "php${PHP_VERSION} /usr/local/bin/composer install"
             }
         }
-    }
      stage('Sonarqube Analysis - SAST') {
          steps {
                withSonarQubeEnv('SonarQube') {
